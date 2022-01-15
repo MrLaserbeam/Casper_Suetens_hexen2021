@@ -12,8 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ae671e241370a34a9f96e6792f820ea, type: 3}
   m_Name: DefaultHexenPieceViewFactory
   m_EditorClassIdentifier: 
-  _pieceViews:
-  - {fileID: -6256330251699635100, guid: 168ede098e74318489368364799537d0, type: 3}
   _movementNames: []
   _prefab: {fileID: -6256330251699635100, guid: 168ede098e74318489368364799537d0, type: 3}
-  _position: {fileID: 11400000, guid: debe312473a5fa84a80ba20805c83897, type: 2}
+  _positionHelper: {fileID: 0}
