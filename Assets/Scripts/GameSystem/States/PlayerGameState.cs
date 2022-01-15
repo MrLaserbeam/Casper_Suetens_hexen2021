@@ -24,6 +24,8 @@ namespace GameSystem.States
         private Hand<CardBase> _hand;
         private int _cardsPlayed;
 
+        public HexenPiece NewPlayer;
+
         public PlayerGameState(Board<HexenPiece> board, HexenPiece player, Deck<CardBase> deck, Hand<CardBase> hand)
         {
             _board = board;

@@ -33,7 +33,7 @@ namespace GameSystem.States
             
             //MoveEnemies();
 
-            UpdateEnemyTargets();
+            //UpdateEnemyTargets();
 
             StateMachine.MoveTo(GameStates.Player);
         }
