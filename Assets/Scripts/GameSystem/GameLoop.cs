@@ -28,7 +28,7 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
     [SerializeField]
     PositionHelper _positionHelper = null;
 
-    StateMachine<GameStateBase> _stateMachine;
+    private StateMachine<GameStateBase> _stateMachine;
 
     private PlayerView _playerView;
 
@@ -84,6 +84,8 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
         ConnectViewsToModel();
 
         FindPlayer();
+
+        Player = _playerView.Model;
 
         var playGameState = new PlayGameState(Board, MoveManager);
         _stateMachine.RegisterState(GameStates.Play, playGameState);
