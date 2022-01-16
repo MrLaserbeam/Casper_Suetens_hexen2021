@@ -45,6 +45,8 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
 
     public List<GameObject> PieceViews = new List<GameObject>();
 
+    public Material PlayerMaterial, EnemyMaterial;
+
     public HexenPiece Player;
 
     #endregion
@@ -90,9 +92,10 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
         var playGameState = new PlayGameState(Board, MoveManager);
         _stateMachine.RegisterState(GameStates.Play, playGameState);
         _stateMachine.RegisterState(GameStates.Replay, new ReplayGameState(replayManager));
-        _stateMachine.RegisterState(GameStates.Player, new PlayerGameState(Board, _playerView.Model, Deck, Hand));
-        _stateMachine.RegisterState(GameStates.Enemy, new EnemyGameState(Board, _playerView.Model));
-        _stateMachine.MoveTo(GameStates.Enemy);
+        _stateMachine.RegisterState(GameStates.Player, new PlayerGameState(Board, Player, Deck, Hand));
+        //_stateMachine.RegisterState(GameStates.Select, new PlayerSelectGameState(Board, Player, PlayerMaterial, EnemyMaterial));
+        _stateMachine.RegisterState(GameStates.Enemy, new EnemyGameState(Board, Player));
+        _stateMachine.MoveTo(GameStates.Player);
 
         // Manual hexpiece click movement
         MoveManager.Register(PlayerMoveCommandProvider.Name, new PlayerMoveCommandProvider(playGameState, replayManager));
@@ -241,9 +244,11 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
             Board.Place(tile, piece);
             MoveManager.Register(piece, pieceView.MovementName);
 
-            PieceViews.Add(pieceView.gameObject);
-
             pieceView.Model = piece;
+
+            Board.Pieces.Add(piece);
+
+            PieceViews.Add(pieceView.gameObject);
         }
         var enemyPieceViews = FindObjectsOfType<EnemyView>();
         foreach (var pieceView in enemyPieceViews)
@@ -259,7 +264,7 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
 
             pieceView.Model = piece;
 
-            Board.Enemies.Add(piece);
+            Board.Pieces.Add(piece);
 
             // Add enemy views here to keep it out of board
             Enemies.Add(pieceView);

@@ -43,9 +43,9 @@ namespace GameSystem.States
 
             //Select the next player
             _currentPlayerIndex++;
-            if (_currentPlayerIndex >= _board.Enemies.Count)
+            if (_currentPlayerIndex >= _board.Pieces.Count)
                 _currentPlayerIndex = 0;//_board.Pieces.IndexOf(_player);
-            _player = _board.Enemies[_currentPlayerIndex];
+            _player = _board.Pieces[_currentPlayerIndex];
             GameLoop.Instance.Player = _player;
             _playerView = GameLoop.Instance.PieceViews[_currentPlayerIndex];
 

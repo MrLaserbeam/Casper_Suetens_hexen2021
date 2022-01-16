@@ -36,6 +36,7 @@ namespace GameSystem.States
         public override void OnEnter()
         {
             _cardsPlayed = 0;
+            _player = GameLoop.Instance.Player;
         }
         public override void OnCardReleased(Tile focusedTile, string card)
         {
