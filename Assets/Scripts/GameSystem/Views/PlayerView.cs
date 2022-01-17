@@ -1,5 +1,6 @@
 ﻿using BoardSystem;
 using GameSystem.Models;
+using GameSystem;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -69,5 +70,10 @@ namespace GameSystem.Views
             board.Select(Model);
         }
         public override void Taken() {}
+
+        public void OnDestroy()
+        {
+            FindObjectOfType<GameLoop>().EndGame();
+        }
     }
 }
