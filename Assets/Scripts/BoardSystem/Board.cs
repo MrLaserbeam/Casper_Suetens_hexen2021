@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using UnityEngine;
 
 namespace BoardSystem
 {
@@ -132,6 +133,16 @@ namespace BoardSystem
             {
                 tile.IsHighlighted = false;
             }
+        }
+
+        public void BombExplode(List<Tile> destroyedTiles)
+        {
+            foreach(var tile in destroyedTiles)
+            {
+                Debug.Log("Boom");
+                Tiles.Remove(tile);
+            }
+
         }
 
         protected virtual void OnPiecePlaced(PiecePlacedEventArgs<TPiece> args)

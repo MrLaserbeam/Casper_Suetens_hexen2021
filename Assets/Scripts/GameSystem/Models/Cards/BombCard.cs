@@ -18,7 +18,7 @@ namespace GameSystem.Models.Cards
         public override void OnMouseReleased(Tile playerTile, Tile focusedTile)
         {
             if (Tiles(playerTile, focusedTile).Contains(focusedTile))
-                Board.Move(playerTile, focusedTile);
+                Board.BombExplode(Neighbours(focusedTile, Board));
         }
 
         List<Tile> Neighbours(Tile tile, Board<HexenPiece> board)
@@ -26,18 +26,11 @@ namespace GameSystem.Models.Cards
             var neighbours = new List<Tile>();
 
             //returns all tiles around the tile which has been given through the parameter
-            var validTiles = new HexMovementHelper(board, tile, 2)
+            var validTiles = new HexMovementHelper(board, tile, 1)
                 .Radius(1)
                 .GenerateTiles();
 
-            //makes sure there are no pieces on the tiles in validtiles
-            foreach (var validTile in validTiles)
-            {
-                if (validTile != null && board.PieceAt(validTile) == null)
-                    neighbours.Add(validTile);
-            }
-
-            return neighbours;
+            return validTiles;
         }
         float Distance(Tile fromTile, Tile toTile, Board<HexenPiece> board)
         {
@@ -51,11 +44,14 @@ namespace GameSystem.Models.Cards
 
         public override List<Tile> Tiles(Tile playerTile, Tile focusedTile)
         {
-            //old teleport
             List<Tile> tiles = new List<Tile>();
 
-            if (Board.PieceAt(focusedTile) == null)
-                tiles.Add(focusedTile);
+            tiles.Add(focusedTile);
+
+            foreach (var tile in tiles)
+            {
+                tiles = Neighbours(tile, Board);
+            }
 
             return tiles;
 

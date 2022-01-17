@@ -17,8 +17,10 @@ MonoBehaviour:
   - {fileID: 2865521614676862400, guid: af65c0cea862dc041b12e49bf4c68a79, type: 3}
   - {fileID: 8757487576535431, guid: 02a502b204ab7bc4f91dcce5b35c8109, type: 3}
   - {fileID: 6451594990224059467, guid: d779c4b88bb86664e8077d0ecd3e1cf0, type: 3}
+  - {fileID: -6387282918561540098, guid: de08aaee11e6f1c4cabb2ee8ae5c42d6, type: 3}
   _cardNames:
   - Charge
   - Push
   - Swipe
   - Teleport
+  - Bomb
