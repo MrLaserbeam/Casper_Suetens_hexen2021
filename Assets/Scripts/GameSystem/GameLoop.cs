@@ -119,7 +119,7 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
             { "Push", new PushCard(Board) },
             { "Swipe", new SwipeCard(Board) },
             { "Teleport", new TeleportCard(Board) },
-            { "BombCard", new BombCard(Board) }
+            { "Bomb", new BombCard(Board) }
         };
 
         for (int i = 0; i < _cards.Count; i++)
