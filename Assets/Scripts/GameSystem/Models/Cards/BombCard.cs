@@ -17,8 +17,11 @@ namespace GameSystem.Models.Cards
 
         public override void OnMouseReleased(Tile playerTile, Tile focusedTile)
         {
-            if (Tiles(playerTile, focusedTile).Contains(focusedTile))
-                Board.BombExplode(Neighbours(focusedTile, Board));
+            Board.BombExplode(Tiles(playerTile, focusedTile));
+            foreach(var tile in Tiles(playerTile, focusedTile))
+            {
+                Board.Take(tile);
+            }
         }
 
         List<Tile> Neighbours(Tile tile, Board<HexenPiece> board)
@@ -44,6 +47,7 @@ namespace GameSystem.Models.Cards
 
         public override List<Tile> Tiles(Tile playerTile, Tile focusedTile)
         {
+
             List<Tile> tiles = new List<Tile>();
 
             tiles.Add(focusedTile);
@@ -51,7 +55,9 @@ namespace GameSystem.Models.Cards
             foreach (var tile in tiles)
             {
                 tiles = Neighbours(tile, Board);
+                tiles.Add(focusedTile);
             }
+            
 
             return tiles;
 

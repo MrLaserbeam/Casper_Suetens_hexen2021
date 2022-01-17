@@ -91,6 +91,9 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
         var startGameState = new StartGameState();
         _stateMachine.RegisterState(GameStates.Start, startGameState);
 
+        var endGameState = new EndGameState();
+        _stateMachine.RegisterState(GameStates.End, endGameState);
+
         var playGameState = new PlayGameState(Board, MoveManager);
         _stateMachine.RegisterState(GameStates.Play, playGameState);
         _stateMachine.RegisterState(GameStates.Replay, new ReplayGameState(replayManager));
@@ -187,6 +190,13 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
         _stateMachine.CurrentState.StartGame();
         StartScreen.SetActive(false);
     }
+
+    public void EndGame()
+    {
+        _stateMachine.CurrentState.EndGame();
+        EndScreen.SetActive(true);
+    }
+
 
     #endregion
 

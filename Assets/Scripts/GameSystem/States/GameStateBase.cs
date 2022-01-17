@@ -31,6 +31,8 @@ namespace GameSystem.States
         public virtual void Select(IMoveCommand<HexenPiece> moveCommand) {}
 
         public virtual void StartGame() { }
+
+        public virtual void EndGame() { }
         public virtual void Forward() {}
         public virtual void Backward(){}
     }

@@ -137,10 +137,9 @@ namespace BoardSystem
 
         public void BombExplode(List<Tile> destroyedTiles)
         {
-            foreach(var tile in destroyedTiles)
+            foreach (var tile in destroyedTiles)
             {
-                Debug.Log("Boom");
-                Tiles.Remove(tile);
+                //Destroy all tiles
             }
 
         }
