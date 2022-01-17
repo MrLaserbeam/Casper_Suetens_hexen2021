@@ -14,6 +14,7 @@ using StateSystem;
 using GameSystem.States;
 using DeckSystem;
 using GameSystem.Models.Cards;
+using UnityEngine.UI;
 
 public class GameLoop : SingletonMonoBehaviour<GameLoop>
 {
@@ -49,6 +50,10 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
 
     public HexenPiece Player;
 
+    public Button StartButton;
+
+    public GameObject StartScreen, EndScreen;
+
     #endregion
 
     #region Methods
@@ -66,13 +71,7 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
 
         Hand = Deck.DealHand(5);
 
-        // Chesspiece movements
-        //MoveManager.Register(PawnMoveCommandProvider.Name, new PawnMoveCommandProvider(playGameState, replayManager));
-        //MoveManager.Register(KnightMoveCommandProvider.Name, new KnightMoveCommandProvider(playGameState, replayManager));
-        //MoveManager.Register(RookMoveCommandProvider.Name, new RookMoveCommandProvider(playGameState, replayManager));
-        //MoveManager.Register(BishopMoveCommandProvider.Name, new BishopMoveCommandProvider(playGameState, replayManager));
-        //MoveManager.Register(QueenMoveCommandProvider.Name, new QueenMoveCommandProvider(playGameState, replayManager));
-        //MoveManager.Register(KingMoveCommandProvider.Name, new KingMoveCommandProvider(playGameState, replayManager));
+        Time.timeScale = 0f;
     }
 
     private void Start()
@@ -88,6 +87,9 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
         FindPlayer();
 
         Player = _playerView.Model;
+
+        var startGameState = new StartGameState();
+        _stateMachine.RegisterState(GameStates.Start, startGameState);
 
         var playGameState = new PlayGameState(Board, MoveManager);
         _stateMachine.RegisterState(GameStates.Play, playGameState);
@@ -116,7 +118,8 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
             { "Charge", new ChargeCard(Board) },
             { "Push", new PushCard(Board) },
             { "Swipe", new SwipeCard(Board) },
-            { "Teleport", new TeleportCard(Board) }
+            { "Teleport", new TeleportCard(Board) },
+            { "BombCard", new BombCard(Board) }
         };
 
         for (int i = 0; i < _cards.Count; i++)
@@ -177,6 +180,12 @@ public class GameLoop : SingletonMonoBehaviour<GameLoop>
     public void OnPointerExitTile(UnityEngine.EventSystems.PointerEventData eventData, Tile _model)
     {
         _stateMachine.CurrentState.OnPointerExitTile(eventData, _model);
+    }
+
+    public void StartGame()
+    {
+        _stateMachine.CurrentState.StartGame();
+        StartScreen.SetActive(false);
     }
 
     #endregion

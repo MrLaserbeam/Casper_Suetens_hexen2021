@@ -39,6 +39,7 @@ namespace DeckSystem
             AddCard("Push", _amount);
             AddCard("Swipe", _amount);
             AddCard("Teleport", _amount);
+            //AddCard("BombCard", _amount);
         }
         public void AddCard(string card, int amount = 1)
         {

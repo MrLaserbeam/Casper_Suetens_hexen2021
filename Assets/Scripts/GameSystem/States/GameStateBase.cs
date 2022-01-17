@@ -16,9 +16,7 @@ namespace GameSystem.States
         public StateMachine<GameStateBase> StateMachine { set; get; }
 
         public virtual void OnEnter() {}
-
         public virtual void OnExit() {}
-
 
         public virtual void OnCardReleased(Tile hoverTile, string card) {}
         public virtual void OnCardDragStart(string card) {}
@@ -32,7 +30,7 @@ namespace GameSystem.States
 
         public virtual void Select(IMoveCommand<HexenPiece> moveCommand) {}
 
-
+        public virtual void StartGame() { }
         public virtual void Forward() {}
         public virtual void Backward(){}
     }
